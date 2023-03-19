@@ -7,3 +7,4 @@ ipykernel~=6.21.2
 plotly~=5.13.1
 scikit-learn~=1.2.2
 flask~=2.2
+pytables~=3.7.0
