@@ -1,17 +1,14 @@
-import pandas as pd
 import random
-import gzip
+import pandas as pd
 from plotly import graph_objs as go
-from plotly.graph_objs import *
+import plotly.express as px
 from dash import dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
-import plotly.express as px
-import plotly.graph_objs as go
 from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
 # Load the data
-input_file = 'data/processed/transformed_df.h5'
+input_file = '../data/processed/transformed_df.h5'
 key = 'data'
 transformed_df = pd.read_hdf(input_file, key)
 
@@ -73,7 +70,7 @@ component_selector = dcc.Dropdown(
 
 app.layout = dbc.Container([
     html.H1("🤖 GitHub User Segmentation", style={'textAlign': 'start'}),
-    html.P("A dashboard to take a deeper look into GitHub users' behavior on March 17, 2023", 
+    html.P("A dashboard to take a deeper look into GitHub users' behavior on March 17, 2023, Why only March 17th? Because there is over 4M recorded events on only one day!😬", 
            style={'textAlign': 'start'}),
     html.Hr(),
     dbc.Row([
@@ -83,17 +80,20 @@ app.layout = dbc.Container([
                  component_selector], width=3)]),
     html.Hr(),
     dbc.Card([
-       dbc.CardHeader("Cluster Visualization"),
+       dbc.CardHeader("🧶 Cluster Visualization"),
        dbc.CardBody([dbc.Spinner(dcc.Graph(id="cluster_viz"))]),
        ]),
     html.Br(),
     dbc.Card([
-       dbc.CardHeader("PCA Visualization"),
+       dbc.CardHeader("🗿 PCA Visualization"),
        dbc.CardBody([dbc.Spinner(dcc.Graph(id="pca-plot"))]),
        ]),
     html.Br(),
-    html.P("Build by Mohammad Reza Nabizadeh - UBC MDS - 2023", 
-           style={'textAlign': 'start'})
+    html.P(
+    [
+        "Made with Love at UBC MDS 💜 - 2023  By: ",
+        html.A("Mohammad Reza Nabizadeh", href = "https://nabi.me")
+    ], style={'textAlign': 'start'})
                     
 ])
 
