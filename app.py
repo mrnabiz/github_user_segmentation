@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+import gzip
 from plotly import graph_objs as go
 from plotly.graph_objs import *
 from dash import dash, html, dcc, Input, Output
@@ -10,8 +11,12 @@ from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
 # Load the data
-transformed_df = pd.read_csv('data/processed/transformed_df.csv', index_col=0)
-col_list = transformed_df.columns.to_list()
+input_file = 'data/processed/transformed_df.h5'
+key = 'data'
+transformed_df = pd.read_hdf(input_file, key)
+
+#transformed_df = pd.read_csv('data/processed/transformed_df.csv', index_col=0)
+col_list_dropdown = transformed_df.columns.to_list()
 
 # Styles and bootstraping
 ext_styl = [
@@ -52,7 +57,7 @@ event_selector = dcc.Dropdown(
     clearable=True,
     searchable=True,
     multi=True,
-    value=col_list
+    value=col_list_dropdown
     )
 
 component_selector = dcc.Dropdown(
@@ -61,7 +66,7 @@ component_selector = dcc.Dropdown(
     options=[
         {"label": i, "value": i} for i in range(5, 15)
     ],
-    clearable=True,
+    clearable=False,
     value=10
     )
 
@@ -106,7 +111,6 @@ def update_charts(event_filter, n_component):
     cols_list = transformed_df.columns.to_list()
 
     if len(event_filter) < 3:
-        subtract_list = []
         subtract_list = [x for x in cols_list if x not in event_filter]
         random_index = random.randint(0, len(subtract_list) - 1)
         random_item = subtract_list[random_index]
@@ -151,17 +155,12 @@ def update_charts(event_filter, n_component):
         yaxis_title="Principal Components",
         xaxis = {'side': 'top',  'tickangle':300}
         )
-    fig_2.update_layout(autosize=True)   
-
-    if n_component is None:
-        k_means = 10,
-    else:
-        k_means = n_component
+    fig_2.update_layout(autosize=True)
 
     # Run K-means model
-    k = k_means
+    k = n_component
     kmeans = KMeans(n_clusters=k, random_state=42, n_init="auto")
-    kmeans.fit(transformed_df)
+    kmeans.fit(subset)
     labels = kmeans.labels_
     pca_df["label"] = pd.DataFrame(labels)[0]
     
