@@ -1,0 +1,12 @@
+name: 'gh_us'
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - ipykernel
+  - pandas
+  - plotly
+  - dash=2.8.*
+  - dash-bootstrap-components
+  - pip:
+    - scikit-learn=1.2.2
