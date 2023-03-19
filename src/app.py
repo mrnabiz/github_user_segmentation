@@ -8,9 +8,11 @@ from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
 # Load the data for ML
-input_file = '../data/processed/transformed_df.h5'
-key = 'data'
-transformed_df = pd.read_hdf(input_file, key)
+# input_file = '../data/processed/transformed_df.h5'
+# key = 'data'
+transformed_df = pd.read_csv('../data/processed/transformed_df.csv.zip',
+                          index_col=0,
+                          compression='zip')
 col_list_dropdown = transformed_df.columns.to_list()
 
 # Read the data for Sankey
