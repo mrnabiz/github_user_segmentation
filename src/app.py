@@ -8,19 +8,15 @@ from sklearn.decomposition import PCA
 from sklearn.cluster import KMeans
 
 # Load the data for ML
-# transformed_df = pd.read_csv('../data/processed/transformed_df.csv.zip',
-#                           index_col=0,
-#                           compression='zip')
-#transformed_df = transformed_df.sample(n=100000)
-transformed_df = pd.read_csv('../data/processed/transformed_df.csv', index_col=0)
+transformed_df = pd.read_csv('../data/processed/transformed_df.csv.zip',
+                          index_col=0,
+                          compression='zip')
 col_list_dropdown = transformed_df.columns.to_list()
 
 # Read the data for Sankey
-# combined_df = pd.read_csv('../data/processed/combined_sankey.csv.zip',
-#                           index_col=0,
-#                           compression='zip')
-
-combined_df = pd.read_csv('../data/processed/combined_sankey.csv', index_col=0)
+combined_df = pd.read_csv('../data/processed/combined_sankey.csv.zip',
+                          index_col=0,
+                          compression='zip')
 sankey_col_list = combined_df['type'].unique().tolist()
 sankey_col_list.remove('Start')
 
