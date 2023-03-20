@@ -18,7 +18,7 @@ The GitHub User Segmentation dashboard provides valuable insights into user beha
 The motivation behind the development of the GitHub User Segmentation dashboard is to provide users with a comprehensive tool to analyze and understand user behavior on GitHub, enabling them to optimize their workflows, improve user engagement, and make data-driven decisions.
 
 ## Explore the app 
-You can access the deployed app on [https://link](https://link/)
+You can access the deployed app on [https://github-user-segmentation.onrender.com/](https://github-user-segmentation.onrender.com/)
 ## Description 
 The interactive dashboard includes five major section.
 1. Control toolbox: In this section, you see two dropdown menus that you can use to control the parameter of the ML clustering algorithm. The first drop-down controls the initial events that you want to include and segments your users based on those event types. The second dropdown controls the number of desired clusters for the K-means algorithm. So you might want to try a different number of clusters to see the effect of the segmentation analysis.
